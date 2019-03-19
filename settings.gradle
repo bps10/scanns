@@ -7,7 +7,7 @@ apply plugin: 'scala-cross-build'
 scalaCrossBuild {
 
   defaultScalaVersion '2.11.8'
-  targetScalaVersions '2.10.6','2.11.8'
+  targetScalaVersions '2.11.8'
   buildDefaultOnly false
 
   projectsToCrossBuild(
