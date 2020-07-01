@@ -41,7 +41,16 @@ class LSHNNSSuiteTest {
           .setBucketLimit(500)
           .setNumOutputPartitions(3)
           .setSeed(3L),
-        "signrp", 85, 17, 10, 500, false, 3, 3L, DistanceMetric.l2, 5)
+        "signrp", 85, 17, 10, 500, false, 3, 3L, DistanceMetric.l2, 5),
+      Array(
+        new DotProductRandomProjectionNNS("dotrp")
+          .setNumHashes(85)
+          .setSignatureLength(17)
+          .setJoinParallelism(10)
+          .setBucketLimit(500)
+          .setNumOutputPartitions(3)
+          .setSeed(3L),
+        "dotrp", 85, 17, 10, 500, false, 3, 3L, DistanceMetric.dot, 5)
     )
   }
 

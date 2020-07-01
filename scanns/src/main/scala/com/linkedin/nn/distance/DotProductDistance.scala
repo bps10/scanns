@@ -1,0 +1,33 @@
+/**
+ * Copyright 2018 LinkedIn Corporation. All rights reserved. Licensed under the BSD-2 Clause license.
+ * See LICENSE in the project root for license information.
+ */
+package com.linkedin.nn.distance
+
+import com.linkedin.nn.distance.DistanceMetric.DistanceMetric
+import com.linkedin.nn.utils.VectorUtils
+import org.apache.spark.ml.linalg.{Vector, Vectors}
+
+/**
+ * Compute cosine distance between two given vectors (1 - cosine similarity)
+ *
+ * Note that this is not really a distance measure as per definition of distance metrics but it is not really important
+ * since it only gets invoked for a potential candidate pair. The actual LSH computation still happens over the
+ * true cosine distance measure defined in terms of angle between the vectors
+ */
+object DotProductDistance extends Distance {
+  override val metric: DistanceMetric = DistanceMetric.dot
+
+  /**
+   * Compute distance between x and y
+   *
+   * @param x input vector
+   * @param y input vector
+   * @return dot(x, y)
+   */
+  override def compute(x: Vector, y: Vector): Double = {
+    require(x.numNonzeros > 0 || y.numNonzeros > 0, "Dot product of an empty vector with any vector is undefined")
+    VectorUtils.dot(x, y)
+  }
+
+}

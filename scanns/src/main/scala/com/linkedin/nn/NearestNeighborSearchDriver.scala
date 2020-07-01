@@ -6,7 +6,10 @@ package com.linkedin.nn
 
 import org.apache.spark.sql.avro._
 import com.linkedin.nn.Types.ItemId
-import com.linkedin.nn.algorithm.{BruteForceNNS, CosineSignRandomProjectionNNS, JaccardMinHashNNS, L2ScalarRandomProjectionNNS}
+import com.linkedin.nn.algorithm.{
+  BruteForceNNS, CosineSignRandomProjectionNNS, JaccardMinHashNNS, L2ScalarRandomProjectionNNS,
+  DotProductRandomProjectionNNS
+}
 import com.linkedin.nn.params.NNSCLIParams
 import com.linkedin.nn.utils.CommonConstantsAndUtils
 import org.apache.spark.broadcast.Broadcast
@@ -130,6 +133,16 @@ object NearestNeighborSearchDriver {
 
       case "signRP" =>
         new CosineSignRandomProjectionNNS()
+          .setNumHashes(params.numHashTables)
+          .setSignatureLength(params.signatureLength)
+          .setBucketLimit(params.bucketLimit)
+          .setShouldSampleBuckets(params.shouldSampleBuckets)
+          .setJoinParallelism(params.joinParallelism)
+          .setNumOutputPartitions(params.numOutputFiles)
+          .createModel(numFeatures)
+
+      case "dotRP" =>
+        new DotProductRandomProjectionNNS()
           .setNumHashes(params.numHashTables)
           .setSignatureLength(params.signatureLength)
           .setBucketLimit(params.bucketLimit)

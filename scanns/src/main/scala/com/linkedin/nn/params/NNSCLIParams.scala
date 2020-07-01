@@ -36,8 +36,8 @@ class NNSCLIParams {
   var attributesNameTermPath: String = ""
 
   /**
-   * The algorithm that should be used for nearest neighbor search. The options are `brute`, `signRP`, `scalarRP` and
-   * `minhash`
+   * The algorithm that should be used for nearest neighbor search. The options are `brute`, `signRP`, `scalarRP`,
+   * `minhash` and `dotRP`
    */
   var algorithm: String = "signRP"
 

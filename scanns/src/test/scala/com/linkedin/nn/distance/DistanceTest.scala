@@ -20,6 +20,9 @@ class DistanceTest {
       Array("cosine", v1, v2, 0.434),
       Array("cosine", v1, v3, 0.913),
       Array("cosine", v2, v3, 0.691),
+      Array("dot", v1, v2, -1.0),
+      Array("dot", v1, v3, 0.5),
+      Array("dot", v2, v3, 0.5),
       Array("l2", v1, v2, 2.958),
       Array("l2", v1, v3, 3.240),
       Array("l2", v2, v3, 2.179)

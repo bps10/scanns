@@ -9,13 +9,14 @@ package com.linkedin.nn.distance
  */
 object DistanceMetric extends Enumeration {
   type DistanceMetric = Value
-  val jaccard, cosine, l2 = Value
+  val jaccard, cosine, l2, dot = Value
 
   def getDistance(metric: String): Distance = {
     DistanceMetric.withName(metric.toLowerCase) match {
       case DistanceMetric.jaccard => JaccardDistance
       case DistanceMetric.cosine => CosineDistance
       case DistanceMetric.l2 => L2Distance
+      case DistanceMetric.dot => DotProductDistance
     }
   }
 }
